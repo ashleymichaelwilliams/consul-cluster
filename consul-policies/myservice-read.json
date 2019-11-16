@@ -1,0 +1,32 @@
+{
+  "key_prefix": {
+    "myService/": {
+      "policy": "read"
+    }
+  },
+  "key_prefix": {
+    "": {
+      "policy": "read"
+    }
+  },
+  "node_prefix": {
+    "": {
+      "policy": "read"
+    }
+  },
+  "service": {
+    "redis/": {
+      "policy": "read"
+    }
+  },
+  "agent_prefix": {
+    "": {
+      "policy": "read"
+    }
+  },
+  "session_prefix": {
+    "": {
+      "policy": "read"
+    }
+  }
+}
