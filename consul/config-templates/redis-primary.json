@@ -12,7 +12,7 @@
       {
         "id": "curl ifconfig json",
         "name": "Curl ifconfig.co Website",
-        "args": ["/consul/web-json-check.sh", "ifconfig.co/json", ".user_agent.product", "curl"],
+        "args": ["/consul/script-checks/web-json-check.sh", "ifconfig.co/json", ".city", "El Cajon"],
         "interval": "10s",
         "timeout": "3s"
       }

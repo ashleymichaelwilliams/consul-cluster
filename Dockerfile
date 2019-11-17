@@ -31,8 +31,12 @@ RUN chown consul:consul /usr/local/bin/consul
 VOLUME /consul/consul-data/
 VOLUME /consul/consul-config/
 VOLUME /consul/consul-policies/
+VOLUME /consul/script-checks/
+
 COPY consul/config-templates/ /consul/config-templates/
 COPY consul/consul-policies/ /consul/consul-policies/
+COPY consul/script-checks/ /consul/script-checks/
+
 RUN chown -R consul:consul /consul/
 
 
@@ -52,6 +56,7 @@ RUN exec $SHELL
 
 VOLUME /vault/vault-config/
 VOLUME /vault/vault-policies/
+
 COPY vault/config.json /vault/vault-config/config.json
 COPY vault/vault-policies/ /vault/vault-policies/
 RUN chown -R consul:consul /vault/
@@ -71,7 +76,9 @@ RUN unzip /home/consul/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zi
 RUN chown consul:consul /usr/local/bin/consul-template
 
 VOLUME /consul-template/
+
 COPY consul-template/ /consul-template/
+
 RUN chown -R consul:consul /consul-template/
 
 
