@@ -1,0 +1,21 @@
+{
+  "service": {
+    "id": "redis",
+    "name": "redis",
+    "tags": ["primary"],
+    "meta": {
+      "meta": "Redis Primary Node"
+    },
+    "port": 8000,
+    "enable_tag_override": false,
+    "checks": [
+      {
+        "id": "curl ifconfig json",
+        "name": "Curl ifconfig.co Website",
+        "args": ["/consul/web-json-check.sh", "ifconfig.co/json", ".user_agent.product", "curl"],
+        "interval": "10s",
+        "timeout": "3s"
+      }
+    ]
+  }
+}

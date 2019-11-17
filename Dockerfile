@@ -31,9 +31,9 @@ RUN chown consul:consul /usr/local/bin/consul
 VOLUME /consul/consul-data/
 VOLUME /consul/consul-config/
 VOLUME /consul/consul-policies/
-
-COPY consul-config.json /consul/consul-config/config.json
-COPY consul-policies/ /consul/consul-policies/
+COPY consul/config-templates/ /consul/config-templates/
+COPY consul/consul-policies/ /consul/consul-policies/
+RUN chown -R consul:consul /consul/
 
 
 
@@ -52,9 +52,9 @@ RUN exec $SHELL
 
 VOLUME /vault/vault-config/
 VOLUME /vault/vault-policies/
-
-COPY vault-config.json /vault/vault-config/config.json
-COPY vault-policies/ /vault/vault-policies/
+COPY vault/config.json /vault/vault-config/config.json
+COPY vault/vault-policies/ /vault/vault-policies/
+RUN chown -R consul:consul /vault/
 
 ENV VAULT_ADDR=http://127.0.0.1:8200
 
@@ -71,9 +71,8 @@ RUN unzip /home/consul/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zi
 RUN chown consul:consul /usr/local/bin/consul-template
 
 VOLUME /consul-template/
-
 COPY consul-template/ /consul-template/
-
+RUN chown -R consul:consul /consul-template/
 
 
 
@@ -87,8 +86,3 @@ USER consul
 WORKDIR /home/consul
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-
-# By default you'll get an insecure single-node development server that stores
-# everything in RAM, exposes a web UI and HTTP endpoints, and bootstraps itself.
-# Don't use this configuration for production.
-#CMD ["agent", "-config-dir=/consul/consul-config/"]

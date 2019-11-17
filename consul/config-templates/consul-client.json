@@ -1,0 +1,26 @@
+{
+  "datacenter": "dc1",
+  "data_dir": "/consul/consul-data",
+  "log_level": "INFO",
+  "server": false,
+  "client_addr": "0.0.0.0",
+  "ui": false,
+  "enable_script_checks": true,
+  "retry_join": [
+    "172.17.0.2",
+    "172.17.0.3",
+    "172.17.0.4"
+  ],
+  "node_meta": {
+    "region": "us-central1",
+    "instance_type": "n1-standard-4",
+    "project_name": "ash",
+    "release_ver": "1.0.12",
+    "location": "usw"
+  },
+  "acl": {
+    "enabled": true,
+    "default_policy": "deny",
+    "enable_token_persistence": true
+  }
+}

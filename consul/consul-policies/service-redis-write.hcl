@@ -1,0 +1,3 @@
+service "redis" {
+  policy = "write"
+}
