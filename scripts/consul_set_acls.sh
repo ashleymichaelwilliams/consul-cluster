@@ -12,6 +12,6 @@ echo "Consul Tokens..."
 echo "  Step: Config ACL Tokens"
 echo "    MGMT Token:     $CONSUL_GLOBAL_MANAGEMENT_TOKEN"
 echo "    HTTP Token:     $CONSUL_HTTP_TOKEN"
-echo "    Agent Response: $CONSUL_AGENT_RESPONSE"
+#echo "    Agent Response: $CONSUL_AGENT_RESPONSE"
 echo "    Agent Token:    $CONSUL_AGENT_TOKEN"
 
