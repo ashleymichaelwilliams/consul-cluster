@@ -29,6 +29,7 @@ echo "    HTTP Token:       $CONSUL_HTTP_TOKEN"
 #echo "    Agent Response:   $CONSUL_AGENT_RESPONSE"
 echo "    Agent Token:      $CONSUL_AGENT_TOKEN"
 echo "    Service Token:    $CONSUL_SERVICE_TOKEN"
+echo "    Redis Token:      $CONSUL_REDIS_TOKEN"
 
 # Debugging
 echo

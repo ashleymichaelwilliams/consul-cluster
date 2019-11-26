@@ -1,4 +1,4 @@
-### Consul-Template
+### Client Startup Script: Consul-Template
 
 # Set Consul Agent ACL Tokens
 consul acl set-agent-token agent $CONSUL_AGENT_TOKEN

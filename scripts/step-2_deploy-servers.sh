@@ -46,6 +46,7 @@ docker exec -ti consul-master-1 bash -c "source /home/consul/scripts/consul_boot
   && source /home/consul/scripts/consul_agents.sh \
   && source /home/consul/scripts/consul_set_acls.sh \
   && source /home/consul/scripts/consul_myservice.sh \
+  && source /home/consul/scripts/consul_redis.sh \
   && source /home/consul/scripts/vault_start.sh \
   && sleep 5 \
   && source /home/consul/scripts/vault_init.sh \
