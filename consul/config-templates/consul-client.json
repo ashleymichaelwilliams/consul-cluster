@@ -5,6 +5,7 @@
   "server": false,
   "client_addr": "0.0.0.0",
   "ui": false,
+  "disable_remote_exec": false,
   "enable_script_checks": true,
   "retry_join": [
     "172.17.0.2",
