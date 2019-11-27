@@ -40,7 +40,7 @@ echo
 echo -e "Now Preparing...\n1.) Bootstrap Consul Cluster\n2.) Configure Consul ACL Policies & Tokens\n3.) Start/Initialize Vault Service\n4.) Install Auth Methods and Secret Engines"
 echo
 echo "Allowing Consul Masters to Finish Clustering..."
-sleep 10
+sleep 15
 
 docker exec -ti consul-master-1 bash -c "source /home/consul/scripts/consul_bootstrap.sh \
   && source /home/consul/scripts/consul_agents.sh \

@@ -58,7 +58,7 @@ docker run \
 
 
 echo
-echo -e "Now Preparing...\n1.) Some Task"
+echo -e "Now Preparing...\n1.) Deploy Consul Agent (Consul-Template)\n2.) Deploy Consul Agent (Redis Primary)\n3.) Deploy Consul Agent (Redis Secondary)"
 echo
 echo "Configuring Consul Clients..."
 sleep 10
