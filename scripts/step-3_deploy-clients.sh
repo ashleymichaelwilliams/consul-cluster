@@ -58,13 +58,22 @@ docker run \
 
 
 echo
-echo -e "Now Preparing...\n1.) Deploy Consul Agent (Consul-Template)\n2.) Deploy Consul Agent (Redis Primary)\n3.) Deploy Consul Agent (Redis Secondary)"
+echo -e "Now Preparing...\n1.) Set Consul Agent Tokens on Consul-Template\n2.) Set Consul Agent Tokens on Redis Primary\n3.) Set Consul Agent Tokens on Redis Secondary"
+
 echo
-echo "Configuring Consul Clients..."
+echo 'Setting Consul Agent Tokens on Consul Clients...!'
 sleep 10
 
+echo
+echo "Setting Consul Agent Tokens on Consul-Client-1"
 docker exec -ti consul-client-1 bash -c "source /home/consul/scripts/client-start.sh"
+
+echo
+echo "Setting Consul Agent Tokens on Consul-Redis-Primary"
 docker exec -ti consul-redis-primary bash -c "source /home/consul/scripts/redis-start.sh"
+
+echo
+echo "Setting Consul Agent Tokens on Consul-Redis-Secondary"
 docker exec -ti consul-redis-secondary bash -c "source /home/consul/scripts/redis-start.sh"
 
 
