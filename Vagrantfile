@@ -96,13 +96,6 @@ Vagrant.configure(2) do |config|
   
   # Clone Repository
   git clone https://github.com/ashleymichaelwilliams/consul-cluster.git /consul-cluster
-  cd /consul-cluster
   
-  
-  # Run Scripts
-  #sudo ./scripts/step-1_build-image.sh
-  #sudo ./scripts/step-2_deploy-servers.sh
-  #sudo ./scripts/step-3_deploy-clients.sh
-
   SHELL
 end
