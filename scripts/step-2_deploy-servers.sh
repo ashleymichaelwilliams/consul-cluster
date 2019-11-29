@@ -1,5 +1,15 @@
 #!/bin/bash
 
+KEYGEN=$(docker run --rm -t consul "keygen")
+export KEYGEN=$(echo "${KEYGEN}" | tr -d \"\\r\")
+
+echo
+echo "Consul Encryption Key: $KEYGEN"
+echo
+
+
+echo 'Starting Docker Containers!'
+
 # Setup Server 1
 
 docker run \
@@ -9,7 +19,7 @@ docker run \
  -p 18200:8200 \
  --cap-add IPC_LOCK \
  --env-file dev.env \
- -d consul server
+ -d consul "server-encrypt" "$KEYGEN"
 
 
 # Setup Server 2
@@ -21,7 +31,7 @@ docker run \
  -p 28200:8200 \
  --cap-add IPC_LOCK \
  --env-file dev.env \
- -d consul server
+ -d consul "server-encrypt" "$KEYGEN"
 
 
 # Setup Server 3
@@ -33,7 +43,7 @@ docker run \
  -p 38200:8200 \
  --cap-add IPC_LOCK \
  --env-file dev.env \
- -d consul server
+ -d consul "server-encrypt" "$KEYGEN"
 
 
 echo

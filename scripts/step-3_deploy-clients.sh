@@ -11,7 +11,12 @@ export EXT_CONSUL_SERVICE_TOKEN=$(echo "${EXT_CONSUL_SERVICE_TOKEN}" | tr -d \"\
 export EXT_CONSUL_REDIS_TOKEN=$(echo "${EXT_CONSUL_REDIS_TOKEN}" | tr -d \"\\r\")
 export EXT_VAULT_CLIENT_AUTH_TOKEN=$(echo "${EXT_VAULT_CLIENT_AUTH_TOKEN}" | tr -d \"\\r\")
 
+echo
+echo "Consul Encryption Key: $KEYGEN"
+echo
 
+
+echo 'Starting Docker Containers!'
 
 ### Setup Client 1
 
@@ -24,7 +29,7 @@ docker run \
  -e CONSUL_CLIENT_TOKEN="$EXT_CONSUL_SERVICE_TOKEN" \
  -e VAULT_TOKEN="$EXT_VAULT_CLIENT_AUTH_TOKEN" \
  -e VAULT_ADDR="http://172.17.0.2:8200" \
- -d consul client
+ -d consul client-encrypt "$KEYGEN"
 
 
 ### Setup Redis Primary
@@ -39,7 +44,7 @@ docker run \
  -e VAULT_TOKEN="$EXT_VAULT_CLIENT_AUTH_TOKEN" \
  -e VAULT_ADDR="http://172.17.0.2:8200" \
  -e "ROLE=primary" \
- -d consul redis
+ -d consul redis-encrypt "$KEYGEN"
 
 
 ### Setup Redis Secondary
@@ -54,7 +59,7 @@ docker run \
  -e VAULT_TOKEN="$EXT_VAULT_CLIENT_AUTH_TOKEN" \
  -e VAULT_ADDR="http://172.17.0.2:8200" \
  -e "ROLE=secondary" \
- -d consul redis
+ -d consul redis-encrypt "$KEYGEN"
 
 
 echo
@@ -80,3 +85,4 @@ docker exec -ti consul-redis-secondary bash -c "source /home/consul/scripts/redi
 echo
 echo 'Finished Configuring Consul Clients...!'
 
+echo
