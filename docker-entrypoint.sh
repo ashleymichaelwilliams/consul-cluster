@@ -18,9 +18,18 @@ then
 
 elif [ "$1" = 'server-encrypt' ]
 then
-  echo -E "{\"encrypt\": \"$2\"}" | jq '.'  > /consul/consul-config/.encrypt.key
-  ENCRYPTION_KEY=$(cat /consul/consul-config/.encrypt.key | jq -r .encrypt)
-  jq --arg key $ENCRYPTION_KEY '. += {"encrypt": $key}' /consul/config-templates/consul-server.json  | tee -a /consul/consul-config/consul-server.json
+
+  if ! [ $(cat /consul/consul-config/consul-server.json | jq  -e '.encrypt | length >= 1') ]
+  then
+    echo -E "{\"encrypt\": \"$2\"}" | jq '.'  > /consul/consul-config/.encrypt.key
+    ENCRYPTION_KEY=$(cat /consul/consul-config/.encrypt.key | jq -r .encrypt)
+    echo "missing"
+    jq --arg key $ENCRYPTION_KEY '. += {"encrypt": $key}' /consul/config-templates/consul-server.json  | tee -a /consul/consul-config/consul-server.json
+
+  else
+    echo 'Encryption Key Already Set!'
+
+  fi
 
   consul agent \
     -config-dir=/consul/consul-config/ \
@@ -41,9 +50,18 @@ then
 
 elif [ "$1" = 'client-encrypt' ]
 then
-  echo -E "{\"encrypt\": \"$2\"}" | jq '.'  > /consul/consul-config/.encrypt.key
-  ENCRYPTION_KEY=$(cat /consul/consul-config/.encrypt.key | jq -r .encrypt)
-  jq --arg key $ENCRYPTION_KEY '. += {"encrypt": $key}' /consul/config-templates/consul-client.json  | tee -a /consul/consul-config/consul-client.json
+
+  if ! [ $(cat /consul/consul-config/consul-client.json | jq  -e '.encrypt | length >= 1') ]
+  then
+    echo -E "{\"encrypt\": \"$2\"}" | jq '.'  > /consul/consul-config/.encrypt.key
+    ENCRYPTION_KEY=$(cat /consul/consul-config/.encrypt.key | jq -r .encrypt)
+    echo "missing"
+    jq --arg key $ENCRYPTION_KEY '. += {"encrypt": $key}' /consul/config-templates/consul-client.json  | tee -a /consul/consul-config/consul-client.json
+
+  else
+    echo 'Encryption Key Already Set!'
+
+  fi
 
   consul agent \
     -config-dir=/consul/consul-config/ \
@@ -64,10 +82,19 @@ then
 
 elif [ "$1" = 'redis-encrypt' ]
 then
-  echo -E "{\"encrypt\": \"$2\"}" | jq '.'  > /consul/consul-config/.encrypt.key
-  ENCRYPTION_KEY=$(cat /consul/consul-config/.encrypt.key | jq -r .encrypt)
-  jq --arg key $ENCRYPTION_KEY '. += {"encrypt": $key}' /consul/config-templates/consul-client.json  | tee -a /consul/consul-config/consul-client.json
-  
+
+  if ! [ $(cat /consul/consul-config/consul-client.json | jq  -e '.encrypt | length >= 1') ]
+  then
+    echo -E "{\"encrypt\": \"$2\"}" | jq '.'  > /consul/consul-config/.encrypt.key
+    ENCRYPTION_KEY=$(cat /consul/consul-config/.encrypt.key | jq -r .encrypt)
+    echo "missing"
+    jq --arg key $ENCRYPTION_KEY '. += {"encrypt": $key}' /consul/config-templates/consul-client.json  | tee -a /consul/consul-config/consul-client.json
+
+  else
+    echo 'Encryption Key Already Set!'
+
+  fi
+
   cp /consul/config-templates/redis-$ROLE.json /consul/consul-config/
 
   consul agent \
@@ -76,7 +103,7 @@ then
     -node-meta="environment:$CUSTOM_ENV"
 
 
-else 
+else
   echo 'Consul container was not provided a valid parameter!'
   echo "Valiate parameters are: 'keygen', 'agent[-encrypt]', 'client[-encrypt]' or 'redis[-encrypt]'"
   echo

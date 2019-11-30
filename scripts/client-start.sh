@@ -8,4 +8,3 @@ sleep 5
 
 # Run Consul-Template
 consul-template -template "/consul-template/config.tpl:/consul-template/config-values.yml" -once
-
