@@ -9,6 +9,10 @@ elif [ "$1" = 'server' ]
 then
   cp /consul/config-templates/consul-server.json /consul/consul-config/
 
+  chown -R consul:consul /consul/
+  chown -R consul:consul /vault/
+  chown -R consul:consul /consul-template/
+
   consul agent \
     -config-dir=/consul/consul-config/ \
     -config-format=json \
@@ -31,6 +35,10 @@ then
 
   fi
 
+  chown -R consul:consul /consul/
+  chown -R consul:consul /vault/
+  chown -R consul:consul /consul-template/
+
   consul agent \
     -config-dir=/consul/consul-config/ \
     -config-format=json \
@@ -41,6 +49,10 @@ then
 elif [ "$1" = 'client' ]
 then
   cp /consul/config-templates/consul-client.json /consul/consul-config/
+
+  chown -R consul:consul /consul/
+  chown -R consul:consul /vault/
+  chown -R consul:consul /consul-template/
 
   consul agent \
     -config-dir=/consul/consul-config/ \
@@ -63,6 +75,10 @@ then
 
   fi
 
+  chown -R consul:consul /consul/
+  chown -R consul:consul /vault/
+  chown -R consul:consul /consul-template/
+
   consul agent \
     -config-dir=/consul/consul-config/ \
     -config-format=json \
@@ -73,6 +89,10 @@ elif [ "$1" = 'redis' ]
 then
   cp /consul/config-templates/consul-client.json /consul/consul-config/
   cp /consul/config-templates/redis-$ROLE.json /consul/consul-config/
+
+  chown -R consul:consul /consul/
+  chown -R consul:consul /vault/
+  chown -R consul:consul /consul-template/
 
   consul agent \
     -config-dir=/consul/consul-config/ \
@@ -96,6 +116,10 @@ then
   fi
 
   cp /consul/config-templates/redis-$ROLE.json /consul/consul-config/
+
+  chown -R consul:consul /consul/
+  chown -R consul:consul /vault/
+  chown -R consul:consul /consul-template/
 
   consul agent \
     -config-dir=/consul/consul-config/ \

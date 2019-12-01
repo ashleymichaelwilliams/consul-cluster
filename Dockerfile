@@ -59,6 +59,7 @@ VOLUME /vault/vault-policies/
 
 COPY vault/config.json /vault/vault-config/config.json
 COPY vault/vault-policies/ /vault/vault-policies/
+
 RUN chown -R consul:consul /vault/
 
 ENV VAULT_ADDR=http://127.0.0.1:8200
