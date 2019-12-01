@@ -3,11 +3,11 @@ path "kv/metadata/*" {
 }
 
 path "kv/metadata/mySecret" {
-   capabilities = ["create", "read", "update", "delete", "list"]
+   capabilities = ["create", "update", "delete", "read", "list"]
 }
 
 path "kv/data/mySecret" {
-   capabilities = ["create", "read", "update", "delete", "list"]
+   capabilities = ["create", "update", "delete", "read", "list"]
 }
 
 path "sys/internal/ui/mounts/*" {

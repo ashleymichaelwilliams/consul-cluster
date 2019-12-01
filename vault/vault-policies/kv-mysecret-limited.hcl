@@ -7,7 +7,7 @@ path "kv/metadata/mySecret" {
 }
 
 path "kv/data/mySecret" {
-   capabilities = ["create", "read", "list"]
+   capabilities = ["create", "update", "read", "list"]
 }
 
 path "sys/internal/ui/mounts/*" {
