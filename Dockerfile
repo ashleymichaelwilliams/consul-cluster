@@ -95,6 +95,7 @@ COPY --chown=consul scripts/ /home/consul/scripts/
 
 RUN sudo chmod 777 /usr/local/bin/docker-entrypoint.sh
 RUN sudo ln -s /usr/local/bin/docker-entrypoint.sh
+RUN sudo chown -R consul:consul /usr/local/bin/
 RUN sudo chown -R consul:consul /home/consul/
 
 
