@@ -27,7 +27,6 @@ then
   then
     echo -E "{\"encrypt\": \"$2\"}" | jq '.'  > /consul/consul-config/.encrypt.key
     ENCRYPTION_KEY=$(cat /consul/consul-config/.encrypt.key | jq -r .encrypt)
-    echo "missing"
     jq --arg key $ENCRYPTION_KEY '. += {"encrypt": $key}' /consul/config-templates/consul-server.json  | tee -a /consul/consul-config/consul-server.json
 
   else
@@ -67,7 +66,6 @@ then
   then
     echo -E "{\"encrypt\": \"$2\"}" | jq '.'  > /consul/consul-config/.encrypt.key
     ENCRYPTION_KEY=$(cat /consul/consul-config/.encrypt.key | jq -r .encrypt)
-    echo "missing"
     jq --arg key $ENCRYPTION_KEY '. += {"encrypt": $key}' /consul/config-templates/consul-client.json  | tee -a /consul/consul-config/consul-client.json
 
   else
@@ -107,7 +105,6 @@ then
   then
     echo -E "{\"encrypt\": \"$2\"}" | jq '.'  > /consul/consul-config/.encrypt.key
     ENCRYPTION_KEY=$(cat /consul/consul-config/.encrypt.key | jq -r .encrypt)
-    echo "missing"
     jq --arg key $ENCRYPTION_KEY '. += {"encrypt": $key}' /consul/config-templates/consul-client.json  | tee -a /consul/consul-config/consul-client.json
 
   else

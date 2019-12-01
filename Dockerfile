@@ -90,10 +90,11 @@ RUN chown -R consul:consul /consul-template/
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 COPY scripts/ /home/consul/scripts/
 
-RUN chown -R consul:consul /home/consul/scripts/
+RUN chown -R consul:consul /home/consul/
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh && ln -s /usr/local/bin/docker-entrypoint.sh
 
 USER consul
 WORKDIR /home/consul
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 
