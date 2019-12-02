@@ -10,8 +10,8 @@ ENV CONSUL_TEMPLATE_VERSION=0.22.0
 
 
 # Download/Install Dependencies
-RUN yum install -y sudo epel-release
-RUN yum install -y unzip jq wget which
+RUN yum install -y epel-release
+RUN yum install -y unzip jq wget which sudo
 
 
 # Creat Container Process User
