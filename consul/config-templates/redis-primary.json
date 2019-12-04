@@ -12,7 +12,8 @@
       {
         "id": "curl ifconfig json",
         "name": "Curl ifconfig.co Website",
-        "args": ["/consul/script-checks/web-json-check.sh", "ifconfig.co/json", ".city", "El Cajon"],
+        "notes": "Checks if the '.city' key/value is returned as expected.",
+        "args": ["/consul/script-checks/web-json-check.sh", "ifconfig.co/json", ".city", "San Diego"],
         "interval": "10s",
         "timeout": "3s"
       }

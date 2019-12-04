@@ -1,11 +1,16 @@
+#!/bin/bash
 
 # Store Tokens as Variables
+KEYGEN=$(docker exec -ti consul-master-1 bash -c "cat /consul/consul-data/serf/local.keyring  | jq -r  '.[]'")
+
 EXT_CONSUL_AGENT_TOKEN=$(docker exec -t consul-master-1 bash -c "grep 'CONSUL_AGENT_TOKEN' ~/.bashrc | cut -d'=' -f2")
 EXT_CONSUL_SERVICE_TOKEN=$(docker exec -t consul-master-1 bash -c "grep 'CONSUL_SERVICE_TOKEN' ~/.bashrc | cut -d'=' -f2")
 EXT_CONSUL_REDIS_TOKEN=$(docker exec -t consul-master-1 bash -c "grep 'CONSUL_REDIS_TOKEN' ~/.bashrc | cut -d'=' -f2")
 EXT_VAULT_CLIENT_AUTH_TOKEN=$(docker exec -t consul-master-1 bash -c "grep 'VAULT_CLIENT_AUTH_TOKEN' ~/.bashrc | cut -d'=' -f2")
 
 # Clean Strings of Encoding
+export KEYGEN=$(echo "${KEYGEN}" | tr -d \"\\r\")
+
 export EXT_CONSUL_AGENT_TOKEN=$(echo "${EXT_CONSUL_AGENT_TOKEN}" | tr -d \"\\r\")
 export EXT_CONSUL_SERVICE_TOKEN=$(echo "${EXT_CONSUL_SERVICE_TOKEN}" | tr -d \"\\r\")
 export EXT_CONSUL_REDIS_TOKEN=$(echo "${EXT_CONSUL_REDIS_TOKEN}" | tr -d \"\\r\")
